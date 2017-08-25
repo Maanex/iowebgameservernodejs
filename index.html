@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html class="fs" style="overflow: hidden;min-width: 800px;min-height: 800px;">
+    <head>
+        <meta charset="utf-8" />
+        <title>Maanex.io</title>
+
+        <script src="./run.js"></script>
+        <script src="./render.js"></script>
+
+        <link href="https://fonts.googleapis.com/css?family=Amatic+SC" rel="stylesheet">
+    </head>
+ 
+    <body class="fs" onload="ready()">
+        <div id="connecting">
+            <center> Connecting... </center>
+        </div>
+
+        <canvas id="gameframe" class="fs"></canvas>
+
+        <script src="/socket.io/socket.io.js"></script>
+        <script>
+            var socket = io.connect('http://localhost:80');
+            socket.on('message', function(message) {
+                alert('The server has a message for you: ' + message);
+            })
+            socket.on('connect', function() {
+                alert('The ');
+            })
+
+            document.getElementById("poke").onclick = socket.emit('message', 'Hi server, how are you?');
+        </script>
+    </body>
+
+    <style>
+        *{
+            font-family: 'Amatic SC', cursive;
+        }
+        *::selection{
+            background: transparent !important;
+        }
+
+        .fs{
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        #connecting{
+            position: absolute;
+            top: calc(50% - 50pt);
+            left: 0px;
+            z-index: 3;
+            font-family: 'Amatic SC', cursive;
+            font-size: 100pt;
+            width: 100%;
+            height: 100%;
+            color: white;
+            text-shadow: 2px 2px 5px black;
+            pointer-events: none;
+        }
+
+        #gameframe{
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            z-index: 0;
+        }
+
+    </style>
+</html>
